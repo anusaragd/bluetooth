@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
 
+
             status = (TextView) findViewById(R.id.status);
             BA = BluetoothAdapter.getDefaultAdapter();
             pairedDevices = BA.getBondedDevices();
@@ -50,10 +51,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
                     if (!BA.isEnabled()) {
-                        Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                        BA.enable();
+//                        Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                         status.setText(On);
                         status.setTextColor(Color.BLUE);
-                        startActivityForResult(turnOn, 0);
+//                        startActivityForResult(turnOn, 0);
                     } else {
                         BA.disable();
                         status.setText(off);
