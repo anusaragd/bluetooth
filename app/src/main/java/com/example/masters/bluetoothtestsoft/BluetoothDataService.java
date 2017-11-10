@@ -15,12 +15,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Locale;
 
-/**
- * Created by MASTERS on 9/11/2560.
- */
 
-class BluetoothDataService {
 
+public class BluetoothDataService {
 
     // Debugging
     private static final String TAG = "BluetoothDataService";
@@ -70,6 +67,13 @@ class BluetoothDataService {
         return mState;
     }
 
+    /**
+     * Start the chat service. Specifically start AcceptThread to begin a
+     * session in listening (server) mode. Called by the Activity onResume() */
+//    public synchronized void startCapture() {
+//        mCaptureThread = new CaptureThread(mConnectedSocket);
+//        mCaptureThread.start();
+//    }
 
     /**
      * Start the ConnectThread to initiate a connection to a remote device.
@@ -113,6 +117,15 @@ class BluetoothDataService {
         mConnectedSocket = socket;
     }
 
+    /**
+     * Stop all threads
+     */
+    public synchronized void stop() {
+        if (D) Log.d(TAG, "stop");
+        if (mConnectThread != null) {mConnectThread.cancel(); mConnectThread = null;}
+//        if (mCaptureThread != null) {mCaptureThread.cancel(); mCaptureThread = null;}
+        setState(STATE_NONE);
+    }
 
     /**
      * Indicate that the connection attempt failed and notify the UI Activity.
@@ -208,6 +221,11 @@ class BluetoothDataService {
             }
         }
     }
+
+    /**
+     * This thread runs during a connection with a remote device.
+     * It handles all incoming and outgoing transmissions.
+     */
 
 }
 
