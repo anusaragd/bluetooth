@@ -89,8 +89,9 @@ public class MainActivity extends AppCompatActivity {
             scan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, DeviceListActivity.class);
-                    startActivity(intent);
+                    startDeviceListActivity();
+//                    Intent intent = new Intent(MainActivity.this, DeviceListActivity.class);
+//                    startActivity(intent);
 //                    if(!mOpened)
 //                    {
 //
@@ -118,11 +119,11 @@ public class MainActivity extends AppCompatActivity {
             });
 
         }
-//    public void startDeviceListActivity()
-//    {
-//        Intent serverIntent = new Intent(this, DeviceListActivity.class);
-//        startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
-//    }
+    public void startDeviceListActivity()
+    {
+        Intent serverIntent = new Intent(this, DeviceListActivity.class);
+        startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
+    }
 
     @Override
     public void onStop() {
