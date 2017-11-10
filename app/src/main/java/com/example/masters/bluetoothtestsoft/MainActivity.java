@@ -1,9 +1,11 @@
 package com.example.masters.bluetoothtestsoft;
 
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -17,6 +19,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 
@@ -42,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter BA;
     private Set<BluetoothDevice> pairedDevices;
 
+    private ProgressDialog mProgressDlg;
+
+    private ArrayList<BluetoothDevice> mDeviceList = new ArrayList<BluetoothDevice>();
+
 //    private BluetoothAdapter mBluetoothAdapter;
     // Initializes Bluetooth adapter.
 //    final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
@@ -66,6 +73,20 @@ public class MainActivity extends AppCompatActivity {
             status = (TextView) findViewById(R.id.status);
             BA = BluetoothAdapter.getDefaultAdapter();
             pairedDevices = BA.getBondedDevices();
+
+            mProgressDlg 		= new ProgressDialog(this);
+
+            mProgressDlg.setMessage("Scanning...");
+            mProgressDlg.setCancelable(false);
+            mProgressDlg.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+
+                    BA.cancelDiscovery();
+                }
+            });
+
             // initiate a Switch
             Switch simpleSwitch = (Switch) findViewById(R.id.switch1);
             simpleSwitch.setChecked(false);
@@ -89,47 +110,12 @@ public class MainActivity extends AppCompatActivity {
             scan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startDeviceListActivity();
-//                    Intent intent = new Intent(MainActivity.this, DeviceListActivity.class);
-//                    startActivity(intent);
-//                    if(!mOpened)
-//                    {
-//
-////                        Intent serverIntent = new Intent(MainActivity.this, DeviceListActivity.class);
-////                        startActivityForResult(serverIntent,0);
-////                        startDeviceListActivity();
-//                    }
-//                    else
-//                    {
-//                        mStop = true;
-//                        if( mBTService != null )
-//                        {
-//                            mBTService.stop();
-//                            mBTService = null;
-//                        }
-////                        scan.setText("Open BT Comm");
-//                        mOpened = false;
-////                        mButtonCaptureRAW.setEnabled(false);
-////                        mButtonCaptureWSQ.setEnabled(false);
-////                        mButtonStop.setEnabled(false);
-////                        mButtonSave.setEnabled(false);
-//                    }
+
 
                 }
             });
 
         }
-    public void startDeviceListActivity()
-    {
-        Intent serverIntent = new Intent(this, DeviceListActivity.class);
-        startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-//        if(D) Log.e(TAG, "-- ON STOP --");
-    }
 
     public void on(View v) {
         if (!BA.isEnabled()) {
