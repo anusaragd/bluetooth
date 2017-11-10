@@ -25,4 +25,6 @@
     <string name="radioISO">ISO Sample</string>
     <string name="textView2">File name: </string>
     <string name="buttonOK">OK</string>
+    <string name="ble_not_supported">gggg</string>
+    ble_not_supported
 </resources>

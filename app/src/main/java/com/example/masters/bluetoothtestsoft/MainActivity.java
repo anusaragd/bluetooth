@@ -2,7 +2,10 @@ package com.example.masters.bluetoothtestsoft;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +13,8 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.Set;
 
 
@@ -17,28 +22,39 @@ public class MainActivity extends AppCompatActivity {
     TextView status;
     String On = "Bluetooth ON";
     String off = "Bluetooth OFF";
-
     // Key names received from the BluetoothDataService Handler
     public static final String DEVICE_NAME = "device_name";
     public static final String TOAST = "toast";
-
     public static final int MESSAGE_STATE_CHANGE = 1;
     public static final int MESSAGE_DEVICE_NAME = 4;
     public static final int MESSAGE_TOAST = 5;
-
     // Intent request codes
     private static final int REQUEST_CONNECT_DEVICE = 1;
-
-
-
     private BluetoothAdapter BA;
     private Set<BluetoothDevice> pairedDevices;
+
+//    private BluetoothAdapter mBluetoothAdapter;
+    // Initializes Bluetooth adapter.
+//    final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+//    private static final int REQUEST_ENABLE_BT = 1;
+
 
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
+//
+//            if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+//                Toast.makeText(this, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();
+//                finish();
+//            }
+//            BA = bluetoothManager.getAdapter();
+//            if (BA == null || !BA.isEnabled()) {
+//                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+//            }
+
 
 
             status = (TextView) findViewById(R.id.status);
