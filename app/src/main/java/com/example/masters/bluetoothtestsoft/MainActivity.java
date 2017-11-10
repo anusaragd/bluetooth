@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     TextView status;
     String On = "Bluetooth ON";
     String off = "Bluetooth OFF";
+    Button scan;
     // Key names received from the BluetoothDataService Handler
     public static final String DEVICE_NAME = "device_name";
     public static final String TOAST = "toast";
@@ -54,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
 //                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 //                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 //            }
-
-
-
             status = (TextView) findViewById(R.id.status);
             BA = BluetoothAdapter.getDefaultAdapter();
             pairedDevices = BA.getBondedDevices();
@@ -77,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
                         status.setText(off);
                         status.setTextColor(Color.RED);
                     }
+                }
+            });
+            scan = (Button) findViewById(R.id.scandrive);
+            scan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
                 }
             });
 
