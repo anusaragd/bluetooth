@@ -89,35 +89,40 @@ public class MainActivity extends AppCompatActivity {
             scan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!mOpened)
-                    {
-                        startDeviceListActivity();
-                    }
-                    else
-                    {
-                        mStop = true;
-                        if( mBTService != null )
-                        {
-                            mBTService.stop();
-                            mBTService = null;
-                        }
-//                        scan.setText("Open BT Comm");
-                        mOpened = false;
-//                        mButtonCaptureRAW.setEnabled(false);
-//                        mButtonCaptureWSQ.setEnabled(false);
-//                        mButtonStop.setEnabled(false);
-//                        mButtonSave.setEnabled(false);
-                    }
+                    Intent intent = new Intent(MainActivity.this, DeviceListActivity.class);
+                    startActivity(intent);
+//                    if(!mOpened)
+//                    {
+//
+////                        Intent serverIntent = new Intent(MainActivity.this, DeviceListActivity.class);
+////                        startActivityForResult(serverIntent,0);
+////                        startDeviceListActivity();
+//                    }
+//                    else
+//                    {
+//                        mStop = true;
+//                        if( mBTService != null )
+//                        {
+//                            mBTService.stop();
+//                            mBTService = null;
+//                        }
+////                        scan.setText("Open BT Comm");
+//                        mOpened = false;
+////                        mButtonCaptureRAW.setEnabled(false);
+////                        mButtonCaptureWSQ.setEnabled(false);
+////                        mButtonStop.setEnabled(false);
+////                        mButtonSave.setEnabled(false);
+//                    }
 
                 }
             });
 
         }
-    public void startDeviceListActivity()
-    {
-        Intent serverIntent = new Intent(this, DeviceListActivity.class);
-        startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
-    }
+//    public void startDeviceListActivity()
+//    {
+//        Intent serverIntent = new Intent(this, DeviceListActivity.class);
+//        startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
+//    }
 
     @Override
     public void onStop() {
