@@ -242,11 +242,11 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(newIntent);
             } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+//                BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+//
+//                mDeviceList.add(device);
 
-                mDeviceList.add(device);
-
-                showToast("Found device " + device.getName());
+//                showToast("Found device " + device.getName());
             }
         }
     };
